@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grace Abbeh | UI/UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --off-black: #111111;
+      --dark-gray: #1c1c1c;
+      --mid-gray: #555555;
+      --light-gray: #aaaaaa;
+      --border: #e0e0e0;
+      --off-white: #f7f7f7;
+      --white: #ffffff;
+      --accent: #0a0a0a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--black);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      background: var(--black);
+      color: var(--white);
+      padding: 7rem 4rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      height: 380px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.8rem;
+      font-weight: 400;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 1.0;
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+      max-width: 700px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 460px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.9rem 2.4rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .hero-cta:hover {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      padding: 1.6rem 4rem;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .stat { display: flex; flex-direction: column; gap: 0.1rem; }
+
+    .stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stat-sep {
+      width: 1px;
+      height: 32px;
+      background: var(--border);
+    }
+
+    /* SECTION */
+    .section { padding: 5.5rem 4rem; }
+
+    .section-header { margin-bottom: 4rem; }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .section-header h2 em {
+      font-style: italic;
+      color: var(--light-gray);
+    }
+
+    /* PROJECT CARD */
+    .project-card {
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+      overflow: hidden;
+    }
+
+    .project-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+    }
+
+    .project-inner.reverse { direction: rtl; }
+    .project-inner.reverse > * { direction: ltr; }
+
+    .project-img {
+      background: var(--off-black);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .project-num {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.07);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* BRANCHES SPECIFIC LAYOUT */
+    .branches-display {
+      width: 100%;
+      height: 100%;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      padding: 1.8rem;
+      gap: 1rem;
+    }
+
+    .branches-row {
+      display: flex;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .branches-row img {
+      border-radius: 6px;
+      object-fit: cover;
+      object-position: top;
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .branches-figma-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 3px;
+      padding: 0.7rem 1rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .branches-figma-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .figma-logo {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* TRIPLE MOCKUP for graphics */
+    .mockup-duo {
+      display: flex;
+      gap: 14px;
+      padding: 1.8rem;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+    }
+
+    .mockup-duo img {
+      flex: 1;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 3px;
+      min-width: 0;
+    }
+
+    /* CODE MOCKUP for Maryland */
+    .code-mockup {
+      padding: 2rem;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .browser-card {
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .browser-bar {
+      background: #003366;
+      padding: 0.6rem 1rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .browser-bar span {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.65rem;
+      background: rgba(255,255,255,0.15);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    .browser-body { padding: 1rem; }
+
+    .browser-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #003366;
+      margin-bottom: 0.3rem;
+    }
+
+    .browser-nav {
+      display: flex;
+      gap: 0.4rem;
+      font-size: 0.62rem;
+      color: #003366;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .browser-search {
+      background: #f0f4f8;
+      border-radius: 2px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.65rem;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+
+    .browser-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .browser-cell {
+      background: #f5f5f5;
+      border-radius: 2px;
+      padding: 0.5rem 0.3rem;
+      text-align: center;
+      font-size: 0.58rem;
+    }
+
+    .browser-help {
+      background: #003366;
+      color: #fff;
+      padding: 0.4rem;
+      border-radius: 2px;
+      font-size: 0.62rem;
+      text-align: center;
+    }
+
+    /* PROJECT CONTENT */
+    .project-content {
+      padding: 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-left: 1px solid var(--border);
+    }
+
+    .project-inner.reverse .project-content {
+      border-left: none;
+      border-right: 1px solid var(--border);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .tag {
+      background: transparent;
+      color: var(--mid-gray);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+      font-weight: 400;
+    }
+
+    .project-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-course {
+      font-size: 0.75rem;
+      color: var(--light-gray);
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.03em;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--mid-gray);
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+      flex-grow: 1;
+    }
+
+    .project-desc strong { color: var(--black); font-weight: 600; }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .meta-box {
+      background: var(--off-white);
+      padding: 0.85rem 1rem;
+      border-top: 2px solid var(--black);
+    }
+
+    .meta-box h4 {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--mid-gray);
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .meta-box p {
+      font-size: 0.78rem;
+      color: var(--black);
+      line-height: 1.4;
+    }
+
+    /* ABOUT */
+    .about-section {
+      background: var(--black);
+      color: var(--white);
+      padding: 5.5rem 4rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+      line-height: 1.15;
+    }
+
+    .about-section h2 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .about-section p {
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-section p strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .about-section p em { font-style: italic; }
+
+    .skills-col h3 {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+    }
+
+    .skill-group { margin-bottom: 2rem; }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .skill-tag {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.55);
+      padding: 0.25rem 0.65rem;
+      font-size: 0.75rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: rgba(255,255,255,0.4);
+      color: var(--white);
+    }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 5.5rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-section h2 em {
+      font-style: italic;
+      color: var(--light-gray);
+    }
+
+    .contact-section .lead {
+      font-size: 0.95rem;
+      color: var(--mid-gray);
+      line-height: 1.8;
+      max-width: 400px;
+    }
+
+    .contact-info-item { margin-bottom: 1.4rem; }
+
+    .contact-info-item h4 {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--light-gray);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-info-item p {
+      font-size: 0.88rem;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .contact-info-item a {
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .contact-info-item a:hover { border-color: var(--black); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+      padding: 1.5rem 4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero, .section, .about-section, .contact-section, .stats { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .project-inner, .project-inner.reverse { grid-template-columns: 1fr; direction: ltr; min-height: auto; }
+      .project-img { min-height: 300px; }
+      .project-content { border-left: none !important; border-right: none !important; border-top: 1px solid var(--border); }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .stats { gap: 1.5rem; }
+      .stat-sep { display: none; }
+      .project-meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Grace Abbeh</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-label">UI/UX Designer &amp; Graphic Designer</p>
+    <h1>Grace <em>Abbeh</em></h1>
+    <p class="hero-sub">Designing with intention, creating with heart. I design interfaces that feel intuitive and look beautiful, rooted in real user needs and built with a graphic designer's eye. From Figma prototypes to brand campaigns, I make ideas visible.</p>
+    <a href="#work" class="hero-cta">View My Work</a>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-val">2+ Years</span>
+      <span class="stat-label">Design Experience</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-val">4 Projects</span>
+      <span class="stat-label">Featured Work</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-val">HCI</span>
+      <span class="stat-label">Human Computer Interaction Training</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <div class="section-header">
+      <h2>Projects &amp; <em>Case Studies</em></h2>
+    </div>
+
+    <!-- 01: Apple Music -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-img">
+          <span class="project-num">01</span>
+          <img src="apple-music-redesign.jpeg" alt="Apple Music Song Select Redesign" style="width:100%; height:100%; object-fit:cover; object-position:left center; display:block;" />
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-tags">
+              <span class="tag">UI/UX Design</span>
+              <span class="tag">Figma</span>
+              <span class="tag">User Research</span>
+              <span class="tag">HCI</span>
+              <span class="tag">Prototyping</span>
+            </div>
+            <h3>Apple Music: Song Select Redesign</h3>
+            <p class="project-course">CIS 435: Human Computer Interaction, Towson University, Spring 2026</p>
+            <p class="project-desc">
+              This project began with a real conversation. I interviewed my friend Sam, a 22-year-old IT student and daily Apple Music user to understand friction points in his listening experience. His frustration was immediate and specific: <strong>adding a song to a playlist takes too many steps.</strong>
+              <br><br>
+              My solution <strong>"Song Select"</strong> surfaces playlist suggestions directly on the Now Playing screen. Using match percentages, it shows the 2 to 3 most relevant playlists right where the user already is, reducing cognitive load and keeping the experience fluid.
+            </p>
+          </div>
+          <div class="project-meta">
+            <div class="meta-box">
+              <h4>My Role</h4>
+              <p>UX Researcher, UI Designer, Prototyper</p>
+            </div>
+            <div class="meta-box">
+              <h4>Research Method</h4>
+              <p>1:1 User Interview, Persona Development, Pain Point Mapping</p>
+            </div>
+            <div class="meta-box">
+              <h4>Core Problem</h4>
+              <p>Adding a song requires 3 steps and a search through 10+ playlists.</p>
+            </div>
+            <div class="meta-box">
+              <h4>Solution</h4>
+              <p>Song Select widget on Now Playing showing top matches with a single tap.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02: Maryland.gov -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-img">
+          <span class="project-num">02</span>
+          <img src="maryland-redesign.jpeg" alt="Maryland.gov Accessibility Redesign Concept" style="width:100%; height:100%; object-fit:contain; object-position:center; display:block; background:#f0f4f8;" />
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-tags">
+              <span class="tag">Accessibility Design</span>
+              <span class="tag">UX Research</span>
+              <span class="tag">Government UI</span>
+              <span class="tag">HCI Principles</span>
+            </div>
+            <h3>Maryland.gov Accessibility Redesign</h3>
+            <p class="project-course">CIS 435: Human Computer Interaction, Towson University, Spring 2026</p>
+            <p class="project-desc">
+              The Maryland.gov website serves millions of residents including elderly users, people with visual impairments, and users with cognitive disabilities. My redesign identified <strong>three distinct user personas</strong> and addressed each systematically through HCI principles.
+              <br><br>
+              Key additions: a persistent <strong>Read Aloud, Text Enlargement, and Translation bar</strong>; simplified navigation; a prominent search bar in the hero; and a <strong>Need Help?</strong> button with a direct phone number for older users unfamiliar with dropdown navigation.
+            </p>
+          </div>
+          <div class="project-meta">
+            <div class="meta-box">
+              <h4>Design Focus</h4>
+              <p>Accessibility, Inclusive Design, Information Architecture</p>
+            </div>
+            <div class="meta-box">
+              <h4>Personas</h4>
+              <p>Visually Impaired, Cognitively Disabled, Older Adults</p>
+            </div>
+            <div class="meta-box">
+              <h4>HCI Connections</h4>
+              <p>Nielsen's Help heuristic, Accessibility heuristic, Cognitive load reduction</p>
+            </div>
+            <div class="meta-box">
+              <h4>Key Feature</h4>
+              <p>Persistent accessibility bar on every page with Read Aloud, Text Enlargement, and Translation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03: The Key Consulting Firm -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-img" style="flex-direction:column; align-items:stretch; background:#f9f7f4;">
+          <span class="project-num" style="color:rgba(0,0,0,0.06);">03</span>
+          <div style="display:flex; align-items:center; justify-content:center; padding:1.8rem 2rem; border-bottom:1px solid #ede9e3; flex-shrink:0;">
+            <img src="https://thekeyconsult.com/wp-content/uploads/2019/04/tkcf_finallogo_web1.png" alt="The Key Consulting Firm" style="height:60px; object-fit:contain; max-width:100%;" />
+          </div>
+          <div style="padding:0.75rem 1rem 0.4rem; flex-shrink:0;">
+            <span style="font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:#aaa; font-family:'DM Sans',sans-serif; font-weight:500;">Sample Work</span>
+          </div>
+          <div style="display:flex; gap:6px; padding:0 1rem 1rem; flex:1; align-items:flex-start;">
+            <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+              <img src="design2.jpg" alt="Parents quote graphic" style="width:100%; height:auto; border-radius:3px; display:block;" />
+              <span style="font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-family:'DM Sans',sans-serif;">Quote Graphics</span>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+              <img src="design3.jpg" alt="Audre Lorde quote" style="width:100%; height:auto; border-radius:3px; display:block;" />
+              <span style="font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-family:'DM Sans',sans-serif;">Brand Awareness</span>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+              <img src="design1.jpg" alt="Key Reads bookclub" style="width:100%; height:auto; border-radius:3px; display:block;" />
+              <span style="font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-family:'DM Sans',sans-serif;">Key Reads Campaign</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-tags">
+              <span class="tag">Graphic Design</span>
+              <span class="tag">Brand Identity</span>
+              <span class="tag">Social Media</span>
+              <span class="tag">Canva</span>
+              <span class="tag">Adobe Suite</span>
+            </div>
+            <h3>The Key Consulting Firm Brand &amp; Social</h3>
+            <p class="project-course">Graphic Designer, Remote, January 2019 to January 2021</p>
+            <p class="project-desc">
+              The Key Consulting Firm is an educational and mental health consulting organization specializing in culturally responsive support for Black children and families. During my two years as their graphic designer, I was responsible for <strong>all visual content</strong> that represented the organization externally.
+              <br><br>
+              Every graphic had to balance two goals: <strong>aesthetic quality</strong> that builds organizational credibility, and <strong>accessibility</strong> to the communities the firm serves.
+            </p>
+          </div>
+          <div class="project-meta">
+            <div class="meta-box">
+              <h4>My Role</h4>
+              <p>Graphic Designer (Contract, Remote)</p>
+            </div>
+            <div class="meta-box">
+              <h4>Tools Used</h4>
+              <p>Canva, Adobe Creative Suite, Facebook, Instagram</p>
+            </div>
+            <div class="meta-box">
+              <h4>Deliverables</h4>
+              <p>Social graphics, event flyers, promotional banners, brand assets</p>
+            </div>
+            <div class="meta-box">
+              <h4>Impact</h4>
+              <p>Consistent brand presence supporting community outreach for Black children and families.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04: Branches -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-img">
+          <span class="project-num">04</span>
+          <div class="branches-display">
+            <div class="branches-row" style="gap:14px">
+              <img src="screenshots/branches/login.jpeg" alt="Branches Login" />
+              <img src="screenshots/branches/community.jpeg" alt="Branches Community" />
+              
+            </div>
+            <a href="https://www.figma.com/proto/d0sJEnXgN8WjhH1hhwMKw9/Wireframes?node-id=283-1148&t=MhwPx13ljIODyjxJ-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=283%3A1148" target="_blank" class="branches-figma-link">
+              <svg class="figma-logo" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 28.5C19 25.9804 20.0009 23.5641 21.7825 21.7825C23.5641 20.0009 25.9804 19 28.5 19C31.0196 19 33.4359 20.0009 35.2175 21.7825C36.9991 23.5641 38 25.9804 38 28.5C38 31.0196 36.9991 33.4359 35.2175 35.2175C33.4359 36.9991 31.0196 38 28.5 38C25.9804 38 23.5641 36.9991 21.7825 35.2175C20.0009 33.4359 19 31.0196 19 28.5Z" fill="#1ABCFE"/>
+                <path d="M0 47.5C0 44.9804 1.00089 42.5641 2.78249 40.7825C4.56408 39.0009 6.98044 38 9.5 38H19V47.5C19 50.0196 17.9991 52.4359 16.2175 54.2175C14.4359 55.9991 12.0196 57 9.5 57C6.98044 57 4.56408 55.9991 2.78249 54.2175C1.00089 52.4359 0 50.0196 0 47.5Z" fill="#0ACF83"/>
+                <path d="M19 0V19H28.5C31.0196 19 33.4359 17.9991 35.2175 16.2175C36.9991 14.4359 38 12.0196 38 9.5C38 6.98044 36.9991 4.56408 35.2175 2.78249C33.4359 1.00089 31.0196 0 28.5 0H19Z" fill="#FF7262"/>
+                <path d="M0 9.5C0 12.0196 1.00089 14.4359 2.78249 16.2175C4.56408 17.9991 6.98044 19 9.5 19H19V0H9.5C6.98044 0 4.56408 1.00089 2.78249 2.78249C1.00089 4.56408 0 6.98044 0 9.5Z" fill="#F24E1E"/>
+                <path d="M0 28.5C0 31.0196 1.00089 33.4359 2.78249 35.2175C4.56408 36.9991 6.98044 38 9.5 38H19V19H9.5C6.98044 19 4.56408 20.0009 2.78249 21.7825C1.00089 23.5641 0 25.9804 0 28.5Z" fill="#A259FF"/>
+              </svg>
+              View Live Prototype in Figma
+            </a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-tags">
+              <span class="tag">UX/UI Design</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Mobile Design</span>
+              <span class="tag">Prototyping</span>
+              <span class="tag">HCI</span>
+              <span class="tag">Accessibility</span>
+            </div>
+            <h3>Branches: Student Social Networking App</h3>
+            <p class="project-course">CIS 435: Human Computer Interaction, Towson University, Spring 2026</p>
+            <p class="project-desc">
+              Branches is a <strong>mobile social networking app</strong> designed to help college students connect with classmates, discover campus events, and build their academic community across universities. Students find peers in the same courses, message connections, share events in chat, and register for campus activities all in one place.
+              <br><br>
+              A core design priority was <strong>accessibility-first settings</strong> built directly into the product: adjustable text size, color themes, contrast modes, dark mode, screen magnification, and screen reader (VoiceOver) support. Designed for a cross-university audience spanning Towson University, Morgan State, Goucher College, and the University of Maryland.
+            </p>
+          </div>
+          <div class="project-meta">
+            <div class="meta-box">
+              <h4>My Role</h4>
+              <p>UX/UI Designer, Researcher, Prototyper</p>
+            </div>
+            <div class="meta-box">
+              <h4>Tools Used</h4>
+              <p>Figma, Wireframing, Prototyping, WCAG Guidelines</p>
+            </div>
+            <div class="meta-box">
+              <h4>Key Features</h4>
+              <p>Course-based connections, campus events, in-app messaging, cross-university community</p>
+            </div>
+            <div class="meta-box">
+              <h4>Screens Designed</h4>
+              <p>12 screens including onboarding, community, messaging, notifications, and full accessibility settings</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-grid">
+      <div>
+        <h2>About <em>Me</em></h2>
+        <p>I'm <strong>Grace Abbeh</strong>, a UI/UX designer and Information Technology graduate from Towson University (May 2026). I came to design through a deep love of graphics, the way a well-crafted visual can communicate more than words, build trust, and make someone feel something.</p>
+        <p>That instinct, combined with formal training in Human-Computer Interaction, has shaped how I approach design: always starting from the user, always asking <em>why</em> before deciding <em>how</em>.</p>
+        <p>My professional background in graphic design gave me real-world experience delivering for clients on deadline. My HCI coursework gave me the framework to understand why certain designs work and others don't. And my current role as a Student Advisor has sharpened my communication skills, because great design, like great advising, is ultimately about understanding what someone needs and making it easy for them to get there.</p>
+        <p>I'm currently completing the <strong>Google UX Design Certificate</strong> on Coursera and actively building my portfolio. I'm looking for opportunities to grow in UI/UX where I can bring both creative intuition and user-centered thinking to a team.</p>
+      </div>
+      <div class="skills-col">
+        <div class="skill-group">
+          <h3>Design &amp; UX</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Wireframing</span>
+            <span class="skill-tag">Prototyping</span>
+            <span class="skill-tag">User Research</span>
+            <span class="skill-tag">Adobe Creative Suite</span>
+            <span class="skill-tag">Canva</span>
+            <span class="skill-tag">Usability Testing</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Development &amp; Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML &amp; CSS</span>
+            <span class="skill-tag">WordPress</span>
+            <span class="skill-tag">SharePoint</span>
+            <span class="skill-tag">Drupal CMS</span>
+            <span class="skill-tag">Microsoft Office Suite</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Education</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">B.S. Information Technology</span>
+            <span class="skill-tag">Towson University</span>
+            <span class="skill-tag">GPA 3.0</span>
+            <span class="skill-tag">Google UX Certificate (In Progress)</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Relevant Coursework</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Human Computer Interaction</span>
+            <span class="skill-tag">Web Technologies</span>
+            <span class="skill-tag">Computers &amp; Creativity</span>
+            <span class="skill-tag">Intro to CS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-grid">
+      <div>
+        <h2>Let's make something <em>together.</em></h2>
+        <p class="lead">I'm actively looking for UI/UX design opportunities, internships, junior roles, and freelance projects. If you're building something and need a designer who cares deeply about craft and users, I'd love to talk.</p>
+      </div>
+      <div>
+        <div class="contact-info-item">
+          <h4>Email</h4>
+          <p><a href="mailto:gracieabbeh@icloud.com">gracieabbeh@icloud.com</a></p>
+        </div>
+        <div class="contact-info-item">
+          <h4>Location</h4>
+          <p>Towson, MD</p>
+        </div>
+        <div class="contact-info-item">
+          <h4>Phone</h4>
+          <p>240-406-3839</p>
+        </div>
+        <div class="contact-info-item">
+          <h4>Education</h4>
+          <p>B.S. Information Technology<br>Towson University, May 2026</p>
+        </div>
+        <div class="contact-info-item">
+          <h4>Currently</h4>
+          <p>Completing Google UX Design Certificate<br>Open to UI/UX opportunities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Grace Abbeh. UI/UX Designer. Towson, MD, <a href="mailto:gracieabbeh@icloud.com">gracieabbeh@icloud.com</a></p>
+  </footer>
+
+</body>
+</html>
