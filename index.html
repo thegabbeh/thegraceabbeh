@@ -6,7 +6,7 @@
   <title>Grace Abbeh | UI/UX Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -309,6 +309,47 @@
   border-radius: 3px;
   min-height: 0;
   background: #000;
+}
+
+/* Key Consult: graphics side by side so the card stays compact */
+.mockup-duo.side-by-side {
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+}
+
+.mockup-duo.side-by-side img {
+  height: auto;
+  min-width: 0;
+}
+
+/* Cameron's Cameras product page preview */
+.shop-display {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem;
+  gap: 1rem;
+}
+
+.shop-display .shop-shot {
+  flex: 1;
+  min-height: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #fff;
+}
+
+.shop-display .shop-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
 }
 
     /* CODE MOCKUP for Maryland */
@@ -631,6 +672,332 @@
       .stat-sep { display: none; }
       .project-meta { grid-template-columns: 1fr; }
     }
+
+    /* =========================================================
+       FROSTED GLASS THEME (Apple inspired)
+       Overrides the original styles above.
+       ========================================================= */
+    :root {
+      --glass: rgba(255,255,255,0.55);
+      --glass-strong: rgba(255,255,255,0.72);
+      --glass-border: rgba(255,255,255,0.7);
+      --hairline: rgba(0,0,0,0.08);
+      --ink: #1d1d1f;
+      --ink-2: #515154;
+      --ink-3: #86868b;
+      --blue: #0071e3;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 1px 1px rgba(0,0,0,0.03), 0 12px 40px rgba(0,0,0,0.08);
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: #f5f5f7;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* soft color washes that the glass blurs over */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -20vmax;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(40vmax 40vmax at 12% 8%, rgba(191,219,254,0.85), transparent 60%),
+        radial-gradient(36vmax 36vmax at 92% 18%, rgba(233,213,255,0.75), transparent 60%),
+        radial-gradient(42vmax 42vmax at 70% 85%, rgba(254,215,226,0.6), transparent 60%),
+        radial-gradient(36vmax 36vmax at 8% 90%, rgba(204,251,241,0.6), transparent 60%),
+        #f5f5f7;
+    }
+
+    h1, h2, h3, .nav-logo, .stat-val, .project-content h3,
+    .section-header h2, .about-section h2, .contact-section h2, .project-num {
+      font-family: var(--sans);
+      letter-spacing: -0.025em;
+    }
+
+    .hero h1 em, .section-header h2 em, .about-section h2 em, .contact-section h2 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #6e6e73, #a1a1a6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* NAV: translucent bar */
+    nav {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--hairline);
+      padding: 0.9rem 4rem;
+    }
+    .nav-logo { color: var(--ink); font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
+    .nav-links a {
+      color: var(--ink-2);
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.88rem;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      background: transparent;
+      color: var(--ink);
+      padding: 8rem 4rem 5rem;
+      text-align: center;
+    }
+    .hero::after { display: none; }
+    .hero-label {
+      display: inline-block;
+      color: var(--ink-2);
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .hero h1 {
+      font-weight: 700;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      letter-spacing: -0.045em;
+      max-width: none;
+    }
+    .hero-sub {
+      color: var(--ink-2);
+      font-size: 1.15rem;
+      font-weight: 400;
+      max-width: 640px;
+      margin: 0 auto 2.6rem;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.8rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .hero-cta:hover { background: #000; color: #fff; transform: scale(1.03); }
+
+    /* STATS: floating glass strip */
+    .stats {
+      margin: 0 4rem;
+      border-radius: var(--radius-lg);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      box-shadow: var(--shadow);
+      justify-content: center;
+    }
+    .stat { align-items: center; text-align: center; }
+    .stat-val { color: var(--ink); font-size: 1.4rem; }
+    .stat-label { text-transform: none; letter-spacing: 0; color: var(--ink-3); font-size: 0.8rem; }
+    .stat-sep { background: var(--hairline); }
+
+    /* PROJECT CARDS: frosted panels */
+    .section-header h2 { font-weight: 700; }
+    .project-card {
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      background: var(--glass);
+      backdrop-filter: blur(30px) saturate(170%);
+      -webkit-backdrop-filter: blur(30px) saturate(170%);
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 2px 2px rgba(0,0,0,0.03), 0 22px 60px rgba(0,0,0,0.12); }
+    .project-inner { min-height: 480px; }
+    .project-img {
+      background: #0b0b0c;
+      margin: 0.75rem;
+      border-radius: calc(var(--radius-xl) - 8px);
+    }
+    .project-num { font-weight: 700; color: rgba(255,255,255,0.08); }
+    .project-content,
+    .project-inner.reverse .project-content { border: none; padding: 2.6rem 2.6rem 2.6rem 1.8rem; }
+    .project-inner.reverse .project-content { padding: 2.6rem 1.8rem 2.6rem 2.6rem; }
+    .project-content h3 { font-weight: 700; font-size: 1.7rem; }
+    .project-course { color: var(--ink-3); letter-spacing: 0; font-size: 0.82rem; }
+    .project-desc { color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; }
+    .project-desc strong { color: var(--ink); }
+    .tag {
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,0.6);
+      color: var(--ink-2);
+      font-size: 0.72rem;
+      padding: 0.25rem 0.75rem;
+      letter-spacing: 0;
+    }
+    .meta-box {
+      border-top: none;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+    .meta-box h4 { color: var(--ink-3); letter-spacing: 0.06em; }
+    .meta-box p { color: var(--ink); }
+
+    /* glass buttons inside dark image panels */
+    .branches-figma-link {
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0;
+      cursor: pointer;
+    }
+    .branches-display, .shop-display { background: transparent; }
+    .branches-row img, .shop-display .shop-shot { border-radius: 14px; }
+    .mockup-duo img { border-radius: 12px; }
+    .browser-card { border-radius: 14px; }
+
+    /* Apple Music: phone screen only */
+    .device-display {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 2rem 1.8rem;
+      background: radial-gradient(70% 60% at 50% 40%, rgba(64,110,180,0.35), transparent 70%);
+    }
+    .device-frame {
+      width: min(240px, 70%);
+      aspect-ratio: 457 / 989;
+      border-radius: 38px;
+      padding: 8px;
+      background: linear-gradient(145deg, #3a3a3c, #1c1c1e);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 30px 60px rgba(0,0,0,0.55);
+    }
+    .device-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 31px;
+      display: block;
+    }
+    .research-btn { width: min(320px, 100%); }
+
+    /* ABOUT: one large glass panel */
+    .about-section {
+      background: transparent;
+      color: var(--ink);
+      padding: 2rem 4rem 5rem;
+    }
+    .about-grid {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(30px) saturate(170%);
+      -webkit-backdrop-filter: blur(30px) saturate(170%);
+      box-shadow: var(--shadow);
+      padding: 3.5rem;
+      gap: 4rem;
+    }
+    .about-section p { color: var(--ink-2); }
+    .about-section p strong { color: var(--ink); }
+    .skills-col h3 { color: var(--ink-3); letter-spacing: 0.08em; }
+    .skill-tag {
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,0.6);
+      color: var(--ink-2);
+    }
+    .skill-tag:hover { color: var(--ink); border-color: rgba(0,0,0,0.2); }
+
+    /* CONTACT */
+    .contact-section { border-top: none; padding-top: 2rem; }
+    .contact-section .lead { color: var(--ink-2); }
+    .contact-info-item h4 { color: var(--ink-3); }
+    .contact-info-item p, .contact-info-item a { color: var(--ink); }
+    .contact-info-item a { border-bottom-color: rgba(0,113,227,0.35); color: var(--blue); }
+    .contact-info-item a:hover { border-color: var(--blue); }
+
+    /* FOOTER */
+    footer {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--hairline);
+      color: var(--ink-3);
+    }
+    footer a { color: var(--ink-2); }
+    footer a:hover { color: var(--ink); }
+
+    /* POPUP */
+    .glass-dialog {
+      margin: auto;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(30px) saturate(170%);
+      -webkit-backdrop-filter: blur(30px) saturate(170%);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      padding: 2rem;
+      width: min(1000px, calc(100vw - 32px));
+      max-height: calc(100vh - 48px);
+      color: var(--ink);
+      font-family: var(--sans);
+    }
+    .glass-dialog::backdrop { background: rgba(0,0,0,0.3); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .glass-dialog .dialog-eyebrow { color: var(--ink-3); font-size: 0.82rem; }
+    .glass-dialog h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.2rem; letter-spacing: -0.02em; }
+    .glass-dialog img { width: 100%; height: auto; border-radius: var(--radius-md); display: block; }
+    .dialog-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.06);
+      color: var(--ink);
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .dialog-close:hover { background: rgba(0,0,0,0.12); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0.85rem 1.25rem; }
+      .hero { padding: 5rem 1.5rem 3.5rem; }
+      .stats { margin: 0 1rem; padding: 1.2rem; }
+      .section { padding-left: 1rem; padding-right: 1rem; }
+      .project-content, .project-inner.reverse .project-content { padding: 1.6rem; border-top: none; }
+      .project-img { min-height: 0; }
+      .mockup-duo.side-by-side { flex-direction: column; }
+      .about-section { padding-left: 1rem; padding-right: 1rem; }
+      .about-grid { padding: 1.8rem; }
+      .contact-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .glass-dialog { padding: 1.25rem; }
+    }
   </style>
 </head>
 <body>
@@ -661,7 +1028,7 @@
     </div>
     <div class="stat-sep"></div>
     <div class="stat">
-      <span class="stat-val">4 Projects</span>
+      <span class="stat-val">5 Projects</span>
       <span class="stat-label">Featured Work</span>
     </div>
     <div class="stat-sep"></div>
@@ -682,7 +1049,14 @@
       <div class="project-inner">
         <div class="project-img">
           <span class="project-num">01</span>
-          <img src="apple-music-redesign.jpeg" alt="Apple Music Song Select Redesign" />
+          <div class="device-display">
+            <div class="device-frame">
+              <img src="apple-music-screen.jpeg" alt="Apple Music Now Playing screen with the Song Select playlist suggestions" />
+            </div>
+            <button type="button" class="branches-figma-link research-btn" data-open="persona-dialog">
+              View User Persona &amp; Research
+            </button>
+          </div>
         </div>
         <div class="project-content">
           <div>
@@ -794,10 +1168,9 @@
       <div class="project-inner">
         <div class="project-img">
           <span class="project-num">03</span>
-          <div class="mockup-duo">
+          <div class="mockup-duo side-by-side">
             <img src="design3.jpg" alt="FYI Series Graphic" />
             <img src="design2.jpg" alt="Play Therapy Quote Graphic" />
-            
           </div>
         </div>
         <div class="project-content">
@@ -902,6 +1275,66 @@
       </div>
     </div>
 
+    <!-- 05: Cameron's Cameras -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-img">
+          <span class="project-num">05</span>
+          <div class="shop-display">
+            <a class="shop-shot" href="cameron-full.jpg" target="_blank" title="View the full product page">
+              <img src="cameron-product.jpg" alt="Cameron's Cameras product page for the Canon EOS Rebel T7 kit" />
+            </a>
+            <a href="https://www.figma.com/design/3xYUYSmXuOZ4nbrqUXwEfg/CameraStore_ProductPage_OptionB?node-id=0-1" target="_blank" class="branches-figma-link">
+              <svg class="figma-logo" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 28.5C19 25.9804 20.0009 23.5641 21.7825 21.7825C23.5641 20.0009 25.9804 19 28.5 19C31.0196 19 33.4359 20.0009 35.2175 21.7825C36.9991 23.5641 38 25.9804 38 28.5C38 31.0196 36.9991 33.4359 35.2175 35.2175C33.4359 36.9991 31.0196 38 28.5 38C25.9804 38 23.5641 36.9991 21.7825 35.2175C20.0009 33.4359 19 31.0196 19 28.5Z" fill="#1ABCFE"/>
+                <path d="M0 47.5C0 44.9804 1.00089 42.5641 2.78249 40.7825C4.56408 39.0009 6.98044 38 9.5 38H19V47.5C19 50.0196 17.9991 52.4359 16.2175 54.2175C14.4359 55.9991 12.0196 57 9.5 57C6.98044 57 4.56408 55.9991 2.78249 54.2175C1.00089 52.4359 0 50.0196 0 47.5Z" fill="#0ACF83"/>
+                <path d="M19 0V19H28.5C31.0196 19 33.4359 17.9991 35.2175 16.2175C36.9991 14.4359 38 12.0196 38 9.5C38 6.98044 36.9991 4.56408 35.2175 2.78249C33.4359 1.00089 31.0196 0 28.5 0H19Z" fill="#FF7262"/>
+                <path d="M0 9.5C0 12.0196 1.00089 14.4359 2.78249 16.2175C4.56408 17.9991 6.98044 19 9.5 19H19V0H9.5C6.98044 0 4.56408 1.00089 2.78249 2.78249C1.00089 4.56408 0 6.98044 0 9.5Z" fill="#F24E1E"/>
+                <path d="M0 28.5C0 31.0196 1.00089 33.4359 2.78249 35.2175C4.56408 36.9991 6.98044 38 9.5 38H19V19H9.5C6.98044 19 4.56408 20.0009 2.78249 21.7825C1.00089 23.5641 0 25.9804 0 28.5Z" fill="#A259FF"/>
+              </svg>
+              View Design in Figma
+            </a>
+          </div>
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-tags">
+              <span class="tag">UI Design</span>
+              <span class="tag">E-commerce</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Desktop Web</span>
+              <span class="tag">Visual Hierarchy</span>
+            </div>
+            <h3>Cameron's Cameras: Product Page</h3>
+            <p class="project-course">E-commerce UI Design &middot; Figma &middot; 2026</p>
+            <p class="project-desc">
+              Cameron's Cameras is a camera and lens retailer, and this desktop product page for the <strong>Canon EOS Rebel T7 kit</strong> is designed to take a shopper from first look to checkout without friction.
+              <br><br>
+              The layout pairs a large product gallery with a focused buy box: price, rating, a clear <strong>"What's in the box"</strong> checklist, and a high-contrast Add to Cart button. Shipping, warranty, and return details sit right under the purchase action to <strong>answer questions before they become reasons to leave</strong>, followed by customer reviews for social proof and a newsletter signup.
+            </p>
+          </div>
+          <div class="project-meta">
+            <div class="meta-box">
+              <h4>My Role</h4>
+              <p>UI Designer</p>
+            </div>
+            <div class="meta-box">
+              <h4>Tools Used</h4>
+              <p>Figma</p>
+            </div>
+            <div class="meta-box">
+              <h4>Page Sections</h4>
+              <p>Navigation, breadcrumbs, gallery, buy box, product details, reviews, newsletter, footer</p>
+            </div>
+            <div class="meta-box">
+              <h4>Design Focus</h4>
+              <p>Clear purchase path, scannable product info, and trust signals near the buy button</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ABOUT -->
@@ -995,6 +1428,27 @@
   <footer>
     <p>&copy; 2026 Grace Abbeh. UI/UX Designer. Towson, MD &middot; <a href="mailto:gracieabbeh@icloud.com">gracieabbeh@icloud.com</a></p>
   </footer>
+
+  <!-- Apple Music persona & research popup -->
+  <dialog id="persona-dialog" class="glass-dialog" aria-label="Apple Music user persona and research">
+    <button type="button" class="dialog-close" aria-label="Close">&times;</button>
+    <p class="dialog-eyebrow">Apple Music: Song Select</p>
+    <h3>User Persona &amp; Research</h3>
+    <img src="apple-music-persona.jpeg" alt="User persona for Sam, a 22 year old IT student, with interview summary, problem statement, pain point, and proposed solution" />
+  </dialog>
+
+  <script>
+    document.querySelectorAll('[data-open]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var d = document.getElementById(btn.getAttribute('data-open'));
+        if (d && d.showModal) d.showModal();
+      });
+    });
+    document.querySelectorAll('dialog').forEach(function (d) {
+      d.querySelector('.dialog-close').addEventListener('click', function () { d.close(); });
+      d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+    });
+  </script>
 
 </body>
 </html>
